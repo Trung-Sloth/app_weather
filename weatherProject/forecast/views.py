@@ -127,7 +127,7 @@ def weather_view(request):
         current_weather=get_current_weather(city)
 
         #load historical data
-        csv_path=os.path.join('C:\\Users\\ASUS\\Downloads\\try1\\weather.csv')
+        csv_path=os.path.join('weather.csv')
         his_data=read_his_data(csv_path)
 
         #prepare and train the rain prediction model
