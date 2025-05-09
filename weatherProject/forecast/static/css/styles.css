@@ -313,6 +313,7 @@ main.clear {
     position: fixed;
     top: 32px;
     left: 170px;
+    border-radius: 50px;
 }
 
 #status1 {
