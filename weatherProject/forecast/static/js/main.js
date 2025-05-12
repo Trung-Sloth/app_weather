@@ -178,9 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   confirmBtn.addEventListener('click', () => {
     if (n != 0) {
-      document.getElementById('status1').innerText = `Vi-do1=${x1}, Kinh-do1=${y1}`;
-      document.getElementById('status2').innerText = `Vi-do2=${x2}, Kinh-do2=${y2}`;
-      document.getElementById('status3').innerText = `Vi-do3=${x3}, Kinh-do3=${y3}`;
+      document.getElementById('status1').innerText = `Vĩ độ 1=${x1}, Kinh độ 1=${y1}`;
+      document.getElementById('status2').innerText = `Vĩ độ 2=${x2}, Kinh độ 2=${y2}`;
+      document.getElementById('status3').innerText = `Vĩ độ 3=${x3}, Kinh độ 3=${y3}`;
     }
     else {
       document.getElementById('status1').innerText = '';
