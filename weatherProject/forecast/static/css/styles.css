@@ -8,6 +8,7 @@
     font-style: normal;
     line-height: normal;
 }
+
 body {
     background-color: #080808;
     display: flex;
@@ -98,7 +99,7 @@ main.clear {
 }
 
 
-.side-container{
+.side-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -107,14 +108,14 @@ main.clear {
     padding: 40px;
     height: 100%;
 
-    border-right: 1px solid rgb(255,255,255,0.4);
-    background: rgb(255,255,255,0.15);
+    border-right: 1px solid rgb(255, 255, 255, 0.4);
+    background: rgb(255, 255, 255, 0.15);
     backdrop-filter: blur(22.5px);
 }
 
 
 /*INPUT*/
-.search-container{
+.search-container {
     width: 100%;
     padding-bottom: 6px;
     margin-bottom: 55px;
@@ -133,16 +134,16 @@ main.clear {
 
     margin: 0 10px;
 
-    color: rgba(255,255,255,1);
+    color: rgba(255, 255, 255, 1);
 
     font-size: 13px;
 }
 
 .geo-input::placeholder {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
 }
 
-.search-button{
+.search-button {
     border: none;
     background: transparent;
     /* -webkit-animation: none; */
@@ -171,7 +172,7 @@ main.clear {
 }
 
 .day-stats__temperature_value {
-    line-height:  100%;
+    line-height: 100%;
 }
 
 .day-stats__feelslike {
@@ -229,11 +230,11 @@ main.clear {
 .secondary-title {
     margin-bottom: 17px;
     color: #fff;
-    font-size:  13px;
+    font-size: 13px;
 }
 
 .weather__primary-title {
-    margin-bottom:  16px;
+    margin-bottom: 16px;
     color: #fff;
     font-size: 38px;
 
@@ -298,9 +299,9 @@ main.clear {
     color: #fff;
     font-size: 12px;
     margin-bottom: 10px;
-} */
+}
 
-#chart {
+*/ #chart {
     margin: 30px auto 30px;
     width: 100%;
 }
@@ -327,11 +328,11 @@ main.clear {
 #status2 {
     position: fixed;
     bottom: 0px;
-    left: 600px;
+    left: 650px;
     z-index: 1;
     color: #fff;
 }
- 
+
 #status3 {
     position: fixed;
     bottom: 0px;
@@ -342,11 +343,11 @@ main.clear {
 
 #toggleBtn {
     position: fixed;
-    top: 80px;
-    right: 300px;
+    top: 75px;
+    right: 260px;
     padding: 8px 16px;
     background-color: #28a745;
-    z-index:  1;
+    z-index: 1;
     color: white;
     border: none;
     border-radius: 6px;
@@ -360,38 +361,84 @@ main.clear {
 #confirmBtn {
     display: none;
     position: fixed;
-    top: 20px;
-    right: 30px;
+    top: 150px;
+    right: 35px;
     /* padding: 16px 16px; */
     height: 50px;
     width: 70px;
     background-color: #f4f410;
-    z-index:  1;
+    z-index: 1;
     color: black;
     border: none;
     border-radius: 6px;
     cursor: pointer;
 }
+
 #confirmBtn:active {
-  opacity: 0.5;
+    opacity: 0.5;
 }
 
 #deleteBtn {
     display: none;
     position: fixed;
-    top: 100px;
-    right: 30px;
+    top: 230px;
+    right: 35px;
     /* padding: 16px 20px; */
     height: 50px;
     width: 70px;
     background-color: #f4f410;
-    z-index:  1;
+    z-index: 1;
     color: black;
     border: none;
     border-radius: 6px;
     cursor: pointer;
 }
+
 #deleteBtn:active {
-  opacity: 0.5;
+    opacity: 0.5;
 }
-    
+
+#map-pin {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    line-height: 1.8;
+    z-index: 1000;
+}
+
+#pin-item-1,
+#pin-item-2,
+#pin-item-3 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 5px;
+}
+
+#pin-color-red,
+#pin-color-green,
+#pin-color-blue {
+    width: 16px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#pin-color-red {
+    background-image: url('https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png');
+}
+
+#pin-color-green {
+    background-image: url('https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png');
+}
+
+#pin-color-blue {
+    background-image: url('https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png');
+}
