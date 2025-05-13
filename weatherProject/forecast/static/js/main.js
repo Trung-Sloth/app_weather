@@ -171,13 +171,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   deleteBtn.addEventListener('click', () => {
+    n = 0;
     map.removeLayer(currentMarker1);
     map.removeLayer(currentMarker2);
     map.removeLayer(currentMarker3);
     document.getElementById('status1').innerText = '';
     document.getElementById('status2').innerText = '';
     document.getElementById('status3').innerText = '';
-    n = 0;
   });
 
 });
