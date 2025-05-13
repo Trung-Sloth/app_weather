@@ -51,36 +51,21 @@ document.addEventListener('DOMContentLoaded', () => {
     shadowSize: [41, 41]
   });
 
-  // let currentMarker = null;
+  const yellowIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
   let currentMarker1 = null;
   let currentMarker2 = null;
   let currentMarker3 = null;
   var n = 0;
   var x1 = 0, x2 = 0, x3 = 0;
   var y1 = 0, y2 = 0, y3 = 0;
-
-  // map.on('click', function(e) {
-  //     const lat = e.latlng.lat.toFixed(6);
-  //     const lng = e.latlng.lng.toFixed(6);
-
-  //     db.ref("Toa-do").set({
-  //     lat: parseFloat(lat),
-  //     lng: parseFloat(lng),
-  //     })
-  //     .then(() => {
-  //     document.getElementById('status').innerText = `Vi-do=${lat}, Kinh-do=${lng}`;
-  //     })
-  //     .catch((error) => {
-  //     document.getElementById('status').innerText = `Error: ${error}`;
-  //     });
-
-
-  //     if (currentMarker) {
-  //     map.removeLayer(currentMarker);
-  //     }
-
-  //     currentMarker = L.marker([lat, lng]).addTo(map);
-  // });
 
   map.on('click', function (e) {
     n = n + 1;
@@ -89,12 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const lng1 = e.latlng.lng.toFixed(6);
       x1 = lat1;
       y1 = lng1;
-
-
-      // db.ref("Toa-do-1").set({
-      //   lat: parseFloat(lat1),
-      //   lng: parseFloat(lng1),
-      // })
 
       if ((n % 3 == 1) && (n > 3)) {
         map.removeLayer(currentMarker1);
@@ -108,11 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
       x2 = lat2;
       y2 = lng2;
 
-      // db.ref("Toa-do-2").set({
-      //   lat: parseFloat(lat2),
-      //   lng: parseFloat(lng2),
-      // })
-
       if ((n % 3 == 2) && (n > 3)) {
         map.removeLayer(currentMarker2);
       }
@@ -124,11 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const lng3 = e.latlng.lng.toFixed(6);
       x3 = lat3;
       y3 = lng3;
-
-      // db.ref("Toa-do-3").set({
-      //   lat: parseFloat(lat3),
-      //   lng: parseFloat(lng3),
-      // })
 
       if ((n % 3 == 0) && (n > 3)) {
         map.removeLayer(currentMarker3);
@@ -162,7 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else {
       mapDiv.style.display = 'none';
-      // document.getElementById('status').innerText = '';
       document.getElementById('status1').innerText = '';
       document.getElementById('status2').innerText = '';
       document.getElementById('status3').innerText = '';
