@@ -328,7 +328,8 @@ main.clear {
 #status2 {
     position: fixed;
     bottom: 0px;
-    left: 650px;
+    left: 50%;
+    transform: translate(-50%,0);
     z-index: 1;
     color: #fff;
 }
@@ -336,15 +337,17 @@ main.clear {
 #status3 {
     position: fixed;
     bottom: 0px;
-    left: 1200px;
+    right: 0px;
     z-index: 1;
     color: #fff;
 }
 
 #toggleBtn {
     position: fixed;
-    top: 75px;
-    right: 260px;
+    top: 8%;
+    right: 18%;
+    /* top: 75px;
+    right: 260px; */
     padding: 8px 16px;
     background-color: #28a745;
     z-index: 1;
@@ -361,8 +364,9 @@ main.clear {
 #confirmBtn {
     display: none;
     position: fixed;
-    top: 150px;
-    right: 35px;
+    top: 24%;
+    right: 2.5%;
+    /* right: 35px; */
     /* padding: 16px 16px; */
     height: 50px;
     width: 70px;
@@ -381,8 +385,9 @@ main.clear {
 #deleteBtn {
     display: none;
     position: fixed;
-    top: 230px;
-    right: 35px;
+    top: 35%;
+    right: 2.5%;
+    /* right: 35px; */
     /* padding: 16px 20px; */
     height: 50px;
     width: 70px;
@@ -401,8 +406,9 @@ main.clear {
 #map-pin {
     display: none;
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 5%;
+    right: 1.5%;
+    /* right: 20px; */
     background-color: white;
     border-radius: 8px;
     padding: 10px;
