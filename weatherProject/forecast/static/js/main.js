@@ -91,11 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
   var y1 = 0, y2 = 0, y3 = 0;
   // Creat markers on map click
   map.on('click', function (e) {
-    map.removeLayer(lastMarker1);
-    map.removeLayer(lastMarker2);
-    map.removeLayer(lastMarker3);
+    // map.removeLayer(lastMarker1);
+    // map.removeLayer(lastMarker2);
+    // map.removeLayer(lastMarker3);
     n = n + 1;
     if (n % 3 == 1) {
+      map.removeLayer(lastMarker1);
       const lat1 = e.latlng.lat.toFixed(6);
       const lng1 = e.latlng.lng.toFixed(6);
       x1 = lat1;
@@ -109,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (n % 3 == 2) {
+      map.removeLayer(lastMarker2);
       const lat2 = e.latlng.lat.toFixed(6);
       const lng2 = e.latlng.lng.toFixed(6);
       x2 = lat2;
@@ -121,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (n % 3 == 0) {
+      map.removeLayer(lastMarker3);
       const lat3 = e.latlng.lat.toFixed(6);
       const lng3 = e.latlng.lng.toFixed(6);
       x3 = lat3;
@@ -199,10 +202,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   deleteBtn.addEventListener('click', () => {
     n = 0;
+    map.removeLayer(lastMarker1);
+    map.removeLayer(lastMarker2);
+    map.removeLayer(lastMarker3);
     map.removeLayer(currentMarker1);
     map.removeLayer(currentMarker2);
     map.removeLayer(currentMarker3);
+
+    // Remove all markers from map
     map.removeLayer(prevFirebaseMarker);
+    
     document.getElementById('status1').innerText = '';
     document.getElementById('status2').innerText = '';
     document.getElementById('status3').innerText = '';
@@ -211,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var uavIcon = new L.Icon({
     iconUrl: 'http://getdrawings.com/free-icon/uav-icon-62.png',
     iconSize: [45, 45],
-    iconAnchor: [20, 20],
+    iconAnchor: [22.5, 22.5],
     popupAnchor: [0, -20],
     shadowSize: [41, 41]
   });
@@ -221,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var prevPos = new L.Icon({
     iconUrl: 'https://vectorified.com/images/red-dot-icon-8.png',
     iconSize: [12, 12],
-    iconAnchor: [4, 4],
+    iconAnchor: [6, 6],
     popupAnchor: [0, -20],
     shadowSize: [41, 41]
   });
@@ -238,6 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add previous position marker
         var prevLat = firebaseMarker.getLatLng().lat;
         var prevLng = firebaseMarker.getLatLng().lng;
+
         prevFirebaseMarker = L.marker([prevLat, prevLng], { icon: prevPos })
           .addTo(map)
       }
