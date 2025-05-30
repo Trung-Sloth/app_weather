@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
   const firebaseConfig = {
     apiKey: "AIzaSyAmd8V46CLS11cyu1UnjqBwtcBUXybnyNA",
     authDomain: "map-1-b0eae.firebaseapp.com",
@@ -10,19 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
-  const map = L.map('map').setView([10.850324, 106.772186], 20);
-
-  //   L.tileLayer('https://api.maptiler.com/maps/openstreetmap/256/{z}/{x}/{y}.jpg?key=WxV6QKoeVDywcxuiW3su', // Map bth
-  //   { 
-  //     tileSize: 256,
-  //     zoomOffset: 0,
-  //     maxZoom: 22
-  //   }).addTo(map);
-
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', //Map ve tinh
-    {
-      maxZoom: 19
-    }).addTo(map);
+  const map = L.map('map');
 
   const redIcon = new L.Icon({
     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
@@ -51,23 +38,62 @@ document.addEventListener('DOMContentLoaded', () => {
     shadowSize: [41, 41]
   });
 
-  // const yellowIcon = new L.Icon({
-  //   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
-  //   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-  //   iconSize: [25, 41],
-  //   iconAnchor: [12, 41],
-  //   popupAnchor: [1, -34],
-  //   shadowSize: [41, 41]
-  // });
+  var lastLat1 = 0, lastLng1 = 0, lastLat2 = 0, lastLng2 = 0, lastLat3 = 0, lastLng3 = 0;
+  var ref1 = db.ref("Toa-do-1");
+  var ref2 = db.ref("Toa-do-2");
+  var ref3 = db.ref("Toa-do-3");
+
+  // Initialize the map with a marker
+  let lastMarker1 = null, lastMarker2 = null, lastMarker3 = null;
+  var n = 0;
+
+  map.on('load', function () {
+    // if (n == 0) {
+      ref1.on("value", (snapshot) => {
+        lastLat1 = parseFloat(snapshot.val().lat);
+        lastLng1 = parseFloat(snapshot.val().lng);
+        console.log("Toa-do-1: " + lastLat1 + ", " + lastLng1);
+        lastMarker1 = L.marker([lastLat1, lastLng1], { icon: redIcon }).addTo(map);
+        console.log("Map loaded");
+      });
+      ref2.on("value", (snapshot) => {
+        lastLat2 = parseFloat(snapshot.val().lat);
+        lastLng2 = parseFloat(snapshot.val().lng);
+        console.log("Toa-do-2: " + lastLat2 + ", " + lastLng2);
+        lastMarker2 = L.marker([lastLat2, lastLng2], { icon: greenIcon }).addTo(map);
+      });
+      ref3.on("value", (snapshot) => {
+        lastLat3 = parseFloat(snapshot.val().lat);
+        lastLng3 = parseFloat(snapshot.val().lng);
+        console.log("Toa-do-3: " + lastLat3 + ", " + lastLng3);
+        lastMarker3 = L.marker([lastLat3, lastLng3], { icon: blueIcon }).addTo(map);
+      });
+    // }
+  });
+
+  map.setView([10.850324, 106.772186], 20);
+  //   L.tileLayer('https://api.maptiler.com/maps/openstreetmap/256/{z}/{x}/{y}.jpg?key=WxV6QKoeVDywcxuiW3su', // Map bth
+  //   { 
+  //     tileSize: 256,
+  //     zoomOffset: 0,
+  //     maxZoom: 22
+  //   }).addTo(map);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', //Map ve tinh
+    {
+      maxZoom: 19
+    }).addTo(map);
 
   let currentMarker1 = null;
   let currentMarker2 = null;
   let currentMarker3 = null;
-  var n = 0;
+
   var x1 = 0, x2 = 0, x3 = 0;
   var y1 = 0, y2 = 0, y3 = 0;
-
+  // Creat markers on map click
   map.on('click', function (e) {
+    map.removeLayer(lastMarker1);
+    map.removeLayer(lastMarker2);
+    map.removeLayer(lastMarker3);
     n = n + 1;
     if (n % 3 == 1) {
       const lat1 = e.latlng.lat.toFixed(6);
@@ -78,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if ((n % 3 == 1) && (n > 3)) {
         map.removeLayer(currentMarker1);
       }
+
       currentMarker1 = L.marker([lat1, lng1], { icon: redIcon }).addTo(map);
     }
 
@@ -111,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mapDiv = document.getElementById('map');
   const confirmBtn = document.getElementById('confirmBtn');
   const deleteBtn = document.getElementById('deleteBtn');
-
+  // Toggle Button
   toggleBtn.addEventListener('click', () => {
     if (confirmBtn.style.display == 'none') {
       confirmBtn.style.display = 'block';
@@ -143,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else mapPin.style.display = 'none';
   });
-
+  // Confirm Button
   confirmBtn.addEventListener('click', () => {
     if (n != 0) {
       document.getElementById('status1').innerText = `Vĩ độ 1=${x1}, Kinh độ 1=${y1}`;
@@ -175,20 +202,30 @@ document.addEventListener('DOMContentLoaded', () => {
     map.removeLayer(currentMarker1);
     map.removeLayer(currentMarker2);
     map.removeLayer(currentMarker3);
+    map.removeLayer(prevFirebaseMarker);
     document.getElementById('status1').innerText = '';
     document.getElementById('status2').innerText = '';
     document.getElementById('status3').innerText = '';
   });
 
-  const uavIcon = new L.Icon({
+  var uavIcon = new L.Icon({
     iconUrl: 'http://getdrawings.com/free-icon/uav-icon-62.png',
     iconSize: [45, 45],
     iconAnchor: [20, 20],
     popupAnchor: [0, -20],
     shadowSize: [41, 41]
   });
-
   let firebaseMarker = null;
+
+  // Marker for previous position
+  var prevPos = new L.Icon({
+    iconUrl: 'https://vectorified.com/images/red-dot-icon-8.png',
+    iconSize: [12, 12],
+    iconAnchor: [4, 4],
+    popupAnchor: [0, -20],
+    shadowSize: [41, 41]
+  });
+  let prevFirebaseMarker = null;
 
   db.ref("Toa-do-hien-tai").on("value", (snapshot) => {
     const data = snapshot.val();
@@ -198,13 +235,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (firebaseMarker) {
         map.removeLayer(firebaseMarker);
+        // Add previous position marker
+        var prevLat = firebaseMarker.getLatLng().lat;
+        var prevLng = firebaseMarker.getLatLng().lng;
+        prevFirebaseMarker = L.marker([prevLat, prevLng], { icon: prevPos })
+          .addTo(map)
       }
-
       firebaseMarker = L.marker([lat, lng], { icon: uavIcon })
         .addTo(map)
-        // .bindPopup("UAV")
-        .openPopup();
     }
   });
+
+  // var lastZoom = 19;
+  // map.on('zoom', function () {
+  //   var currentZoom = map.getZoom();
+  //   if(currentZoom < lastZoom) {
+  //     console.log("lastZoom: " + lastZoom + " currentZoom: " + currentZoom);
+  //     lastZoom = currentZoom;
+  //   }
+  // });
 
 });
